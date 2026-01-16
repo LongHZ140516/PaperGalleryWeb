@@ -2,23 +2,25 @@
 import { Github, Mail, Users, FileText } from "lucide-react";
 import CenterUnderline from "@/components/animation/underline-center";
 
+const base = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL;
+
 const data = {
     githubLink: "https://github.com/LongHZ140516/awesome-framework-gallery",
     images: {
-        header: "/images/header",
-        pipeline: "/images/pipeline",
+        header: `${base}/images/header`,
+        pipeline: `${base}/images/pipeline`,
     },
     project: {
-        examples: "/project/examples",
-        templates: "/project/templates",
+        examples: `${base}/project/examples`,
+        templates: `${base}/project/templates`,
     },
     tools: {
-        colors: "/tools/colors",
-        icons: "/tools/icons",
+        colors: `${base}/tools/colors`,
+        icons: `${base}/tools/icons`,
     },
     about: {
-        members: "/about/team",
-        contact: "/about/contact",
+        members: `${base}/about/team`,
+        contact: `${base}/about/contact`,
     },
     company: {
         name: "Paper Gallery",
@@ -69,7 +71,7 @@ const membersInfo = [
 const aboutInfo = [
     { icon: Github, text: "GitHub", href: data.githubLink },
     { icon: Mail, text: "Contact", href: data.about.contact },
-    { icon: FileText, text: "Terms", href: "/about/terms" },
+    { icon: FileText, text: "Terms", href: `${base}/about/terms` },
 ];
 ---
 
@@ -239,7 +241,7 @@ const aboutInfo = [
                         >Privacy Policy</a
                     >
                     <a
-                        href="/about/terms"
+                        href={`${base}/about/terms`}
                         class="hover:underline underline-offset-4"
                         >Terms of Service</a
                     >

@@ -16,16 +16,18 @@ import {
 import { ThemeSwitcher } from "./theme-switcher";
 import GlobalSearchWrapper from "./GlobalSearchWrapper.astro";
 
+const base = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL;
+
 const images_components = [
     {
         type_name: "Header",
-        href: "/images/header",
+        href: `${base}/images/header`,
         description: "Collection of header images.",
         icon: Image,
     },
     {
         type_name: "Pipeline",
-        href: "/images/pipeline",
+        href: `${base}/images/pipeline`,
         description: "Collection of pipeline diagrams.",
         icon: LayoutTemplate,
     },
@@ -34,13 +36,13 @@ const images_components = [
 const project_components = [
     {
         type_name: "Examples",
-        href: "/project/examples",
+        href: `${base}/project/examples`,
         description: "Collection of project examples.",
         icon: GalleryVerticalEnd,
     },
     {
         type_name: "Templates",
-        href: "/project/templates",
+        href: `${base}/project/templates`,
         description: "Collection of project templates.",
         icon: FileJson,
     },
@@ -49,13 +51,13 @@ const project_components = [
 const tools_components = [
     {
         type_name: "Colors",
-        href: "/tools/colors",
+        href: `${base}/tools/colors`,
         description: "Collection of color websites.",
         icon: Palette,
     },
     {
         type_name: "Icons",
-        href: "/tools/icons",
+        href: `${base}/tools/icons`,
         description: "Collection of icon websites.",
         icon: Shapes,
     },
@@ -64,19 +66,19 @@ const tools_components = [
 const about_components = [
     {
         type_name: "Team",
-        href: "/about/team",
+        href: `${base}/about/team`,
         description: "Meet our dedicated team.",
         icon: Users,
     },
     {
         type_name: "Terms",
-        href: "/about/terms",
+        href: `${base}/about/terms`,
         description: "Terms of Use & Copyright Disclaimer.",
         icon: FileText,
     },
     {
         type_name: "Contact",
-        href: "/about/contact",
+        href: `${base}/about/contact`,
         description: "Get in touch with us.",
         icon: Mail,
     },
@@ -111,7 +113,7 @@ const navItems = [
             />
 
             {/* Brand */}
-            <a href="/" class="flex items-center gap-2">
+            <a href={`${base}/`} class="flex items-center gap-2">
                 <img
                     src="/src/content/logo.png"
                     alt="Logo"
@@ -128,7 +130,7 @@ const navItems = [
             {/* Desktop Navigation */}
             <div class="hidden lg:flex gap-6">
                 <a
-                    href="/"
+                    href={`${base}/`}
                     class="text-sm font-medium hover:text-primary py-4 flex items-center transition-colors"
                     >Home</a
                 >
@@ -176,7 +178,7 @@ const navItems = [
                     class="absolute top-4 right-4 p-2 cursor-pointer">X</label
                 >
                 <div class="flex flex-col space-y-4">
-                    <a href="/" class="font-medium text-lg">Home</a>
+                    <a href={`${base}/`} class="font-medium text-lg">Home</a>
                     {
                         navItems.map((section) => (
                             <div class="space-y-2">
