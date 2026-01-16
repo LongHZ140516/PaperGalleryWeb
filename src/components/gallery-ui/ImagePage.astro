@@ -35,13 +35,16 @@ const {
 // Get license display info
 const { isOpen, displayText } = getLicenseDisplayInfo(license);
 
+import fs from "node:fs";
+
 let swatches: { name: string; hex: string }[] = [];
 try {
-    // Use server path for Vibrant color extraction with optimized settings
-    const palette = await Vibrant.from(serverImgSrc)
-        .quality(1) // Higher quality sampling
-        .maxColorCount(256) // More colors to analyze
-        .getPalette();
+    if (serverImgSrc && fs.existsSync(serverImgSrc)) {
+        // Use server path for Vibrant color extraction with optimized settings
+        const palette = await Vibrant.from(serverImgSrc)
+            .quality(1) // Higher quality sampling
+            .maxColorCount(256) // More colors to analyze
+            .getPalette();
     const order = [
         "Vibrant",
         "DarkVibrant",
@@ -51,11 +54,15 @@ try {
         "LightMuted",
     ];
     swatches = order
-        .map((name) => ({ name, sw: (palette as any)[name] }))
-        .filter(({ sw }) => Boolean(sw))
-        .map(({ name, sw }: any) => ({ name, hex: sw.hex ?? sw.getHex?.() }))
-        .filter((x) => Boolean(x.hex));
-    // console.log(`Extracted ${swatches.length} colors for ${title}`);
+        swatches = order
+            .map((name) => ({ name, sw: (palette as any)[name] }))
+            .filter(({ sw }) => Boolean(sw))
+            .map(({ name, sw }: any) => ({ name, hex: sw.hex ?? sw.getHex?.() }))
+            .filter((x) => Boolean(x.hex));
+        // console.log(`Extracted ${swatches.length} colors for ${title}`);
+    } else {
+        console.warn(`Server image path not found or empty: ${serverImgSrc}`);
+    }
 } catch (e) {
     console.error(`Color extraction failed for ${title} (${serverImgSrc}):`, e);
 }
